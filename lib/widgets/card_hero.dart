@@ -23,16 +23,15 @@ class CardHero extends StatelessWidget {
                 _hero.pathImage,
                 fit: BoxFit.cover,
               )),
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                Expanded(child: Container()),
-                Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: Text(
-                    _hero.name,
-                    style: titleStyle,
-                  ),
-                )
-              ]),
+              Positioned(
+                  bottom: 10,
+                  child: Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Text(
+                      _hero.name,
+                      style: titleStyle,
+                    ),
+                  )),
             ])));
   }
 }
