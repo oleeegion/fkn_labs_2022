@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_application_2/constans.dart';
 
@@ -8,8 +7,6 @@ class MarvelApi {
   Future<List<int>> getIdHeroes(int count) async {
     List<int> idHeroes = [];
     String url = "https://gateway.marvel.com:443/v1/public/characters?";
-
-    print(url);
 
     try {
       Response response = await Dio().get(url, queryParameters: {
@@ -21,13 +18,10 @@ class MarvelApi {
 
       for (var dataHero in response.data["data"]["results"]) {
         idHeroes.add(dataHero["id"]);
-        print(dataHero["id"]);
       }
 
       return idHeroes;
     } catch (e) {
-      print("Не удалось получить список героев");
-
       throw Exception("Не удалось получить список героев");
     }
   }

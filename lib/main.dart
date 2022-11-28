@@ -32,50 +32,51 @@ class MyState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        home: Scaffold(
-      backgroundColor: const Color.fromARGB(255, 42, 38, 43),
-      body: MultiProvider(
-        providers: [
-          ChangeNotifierProvider(
-              create: (context) => ChangeColor(), child: MyApp()),
-        ],
-        child: Stack(
-          fit: StackFit.expand,
-          children: [
-            BackgroundTriangle(),
-            Padding(
-                padding: const EdgeInsets.symmetric(vertical: 20),
-                child: Column(
-                  children: [
-                    Image.asset(
-                      "assets/marvel_logo.png",
-                      height: 100,
-                      width: 300,
-                    ),
-                    const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 20),
-                        child:
-                            Text("Выбери своего героя", style: standartStyle)),
-                    FutureBuilder<List<int>>(
-                        future: listIdHeroes,
-                        builder: (context, listId) {
-                          if (listId.hasData) {
-                            return Expanded(child: SliderHeroes(listId.data!));
-                          } else if (listId.hasError) {
-                            return Center(
-                              child: Text(
-                                listId.error.toString(),
-                                style: titleStyle,
-                              ),
-                            );
-                          }
-                          return Center(child: CircularProgressIndicator());
-                        })
-                  ],
-                )),
-          ],
+      home: Scaffold(
+        backgroundColor: const Color.fromARGB(255, 42, 38, 43),
+        body: ChangeNotifierProvider(
+          create: (context) => ChangeColor(),
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
+              BackgroundTriangle(),
+              Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  child: Column(
+                    children: [
+                      Image.asset(
+                        "assets/marvel_logo.png",
+                        height: 100,
+                        width: 300,
+                      ),
+                      const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 20),
+                          child: Text("Выбери своего героя",
+                              style: standartStyle)),
+                      FutureBuilder<List<int>>(
+                          future: listIdHeroes,
+                          builder: (context, listId) {
+                            if (listId.hasData) {
+                              return Expanded(
+                                  child: SliderHeroes(listId.data!));
+                            }
+                            if (listId.hasError) {
+                              return Center(
+                                child: Text(
+                                  listId.error.toString(),
+                                  style: titleStyle,
+                                ),
+                              );
+                            }
+                            return const Center(
+                                child: CircularProgressIndicator());
+                          })
+                    ],
+                  )),
+            ],
+          ),
         ),
       ),
-    ));
+    );
   }
 }

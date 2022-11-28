@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/constans.dart';
 import 'package:flutter_application_2/models/heroes.dart';
@@ -35,15 +34,16 @@ class SliderHeroes extends StatelessWidget {
             builder: ((context, hero) {
               if (hero.hasData) {
                 return CardHero(hero.data!);
-              } else if (hero.hasError) {
+              }
+              if (hero.hasError) {
                 return Center(
                   child: Text(hero.error.toString(), style: subtitleStyle),
                 );
-              } else {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
               }
+
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
             }));
       },
     );
